@@ -1,0 +1,19 @@
+// sample shoe data to test
+{
+  "name": "Air Max 90",
+  "brand": "Nike",
+  "price": 120,
+  "category": "Men"
+}
+{
+  "name": "Classic Heels",
+  "brand": "Zara",
+  "price": 75,
+  "category": "Ladies"
+}
+{
+  "name": "Light-Up Sneakers",
+  "brand": "Skechers",
+  "price": 60,
+  "category": "Kids"
+}
