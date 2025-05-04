@@ -3,7 +3,7 @@ const shoeModel = require("../model/ShoeModel");
 const createShoe = (req, res) => {
   const { name, brand, price, category } = req.body;
   if (!name || !brand || !price || !category) {
-    return res.status(400).json({ message: "all fiel are required" });
+    return res.status(400).json({ message: "all field are required" });
   }
   const newShoe = {
     id: Date.now(),
@@ -20,6 +20,11 @@ const retrieveShoe = (req, res) => {
   const categorybox = req.params.category;
 
   if (!categorybox) {
+    if (shoeModel.length === 0) {
+      return res.status(404).json({
+        message: `shoes not found `,
+      });
+    }
     return res.status(200).json(shoeModel);
   }
   const categoryItselfMen = categorybox.toLowerCase();
@@ -44,13 +49,20 @@ const updateShoe = (req, res) => {
   const shoeIndex = shoeModel.findIndex((si) => si.id === id);
 
   if (shoeIndex === -1) {
-    res.status(404).json({ message: "shoe not found" });
+    return res.status(404).json({ message: "shoe not found" });
   }
 
-  shoeModel[shoeIndex] = { ...[shoeIndex], name, brand, price, category };
+  shoeModel[shoeIndex] = {
+    ...[shoeIndex],
+    id,
+    name,
+    brand,
+    price,
+    category,
+  };
   res
     .status(200)
-    .json({ message: "shoe updated succesfully", shoei: shoeIndex });
+    .json({ message: "shoe updated succesfully", shoe: shoeModel[shoeIndex] });
 };
 
 const deleteShoe = (req, res) => {
